@@ -1,0 +1,979 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1500,
+  "model": {
+    "culture": "es-ES",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/localhost;SS_VirtualDW",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "localhost",
+            "database": "SS_VirtualDW"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "UsernamePassword",
+          "Username": "User_SSVirtual",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "vw_DimPersonalMedico",
+        "columns": [
+          {
+            "name": "Personal_Medico_Key",
+            "dataType": "int64",
+            "sourceColumn": "Personal_Medico_Key"
+          },
+          {
+            "name": "Nombre_Completo_Medico",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Completo_Medico"
+          },
+          {
+            "name": "Sexo",
+            "dataType": "string",
+            "sourceColumn": "Sexo"
+          },
+          {
+            "name": "Edad",
+            "dataType": "int64",
+            "sourceColumn": "Edad"
+          },
+          {
+            "name": "Dependencia",
+            "dataType": "string",
+            "sourceColumn": "Dependencia"
+          },
+          {
+            "name": "Cargo",
+            "dataType": "string",
+            "sourceColumn": "Cargo"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_DimPersonalMedico = Source{[Schema=\"dbo\",Item=\"vw_DimPersonalMedico\"]}[Data]",
+                "in",
+                "    dbo_vw_DimPersonalMedico"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_RazonesFrecuentes",
+        "columns": [
+          {
+            "name": "Razon_cita",
+            "dataType": "string",
+            "sourceColumn": "Razon_cita"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          },
+          {
+            "name": "Porcentaje",
+            "dataType": "double",
+            "sourceColumn": "Porcentaje"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_RazonesFrecuentes = Source{[Schema=\"dbo\",Item=\"vw_RazonesFrecuentes\"]}[Data]",
+                "in",
+                "    dbo_vw_RazonesFrecuentes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_PacientesFrecuentes",
+        "columns": [
+          {
+            "name": "Nombre_COMPLETO_Pacientes",
+            "dataType": "string",
+            "sourceColumn": "Nombre_COMPLETO_Pacientes"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          },
+          {
+            "name": "Ultima_Cita",
+            "dataType": "dateTime",
+            "sourceColumn": "Ultima_Cita"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_PacientesFrecuentes = Source{[Schema=\"dbo\",Item=\"vw_PacientesFrecuentes\"]}[Data]",
+                "in",
+                "    dbo_vw_PacientesFrecuentes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_Tendencia_CitasCanceladas_2023_2024",
+        "columns": [
+          {
+            "name": "Estado",
+            "dataType": "string",
+            "sourceColumn": "Estado"
+          },
+          {
+            "name": "Mes",
+            "dataType": "string",
+            "sourceColumn": "Mes"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_Tendencia_CitasCanceladas_2023_2024 = Source{[Schema=\"dbo\",Item=\"vw_Tendencia_CitasCanceladas_2023_2024\"]}[Data]",
+                "in",
+                "    dbo_vw_Tendencia_CitasCanceladas_2023_2024"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_Tendencia_CitasPorEstado_Mensual",
+        "columns": [
+          {
+            "name": "Estado",
+            "dataType": "string",
+            "sourceColumn": "Estado"
+          },
+          {
+            "name": "Mes",
+            "dataType": "string",
+            "sourceColumn": "Mes"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_Tendencia_CitasPorEstado_Mensual = Source{[Schema=\"dbo\",Item=\"vw_Tendencia_CitasPorEstado_Mensual\"]}[Data]",
+                "in",
+                "    dbo_vw_Tendencia_CitasPorEstado_Mensual"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_TotalCitas_Medico_2025",
+        "columns": [
+          {
+            "name": "Nombre_Completo_Medico",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Completo_Medico"
+          },
+          {
+            "name": "Edad",
+            "dataType": "int64",
+            "sourceColumn": "Edad"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_TotalCitas_Medico_2025 = Source{[Schema=\"dbo\",Item=\"vw_TotalCitas_Medico_2025\"]}[Data]",
+                "in",
+                "    dbo_vw_TotalCitas_Medico_2025"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_TotalCitas_Medico_MesAnio",
+        "columns": [
+          {
+            "name": "Nombre_Completo_Medico",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Completo_Medico"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          },
+          {
+            "name": "Citas_Canceladas",
+            "dataType": "int64",
+            "sourceColumn": "Citas_Canceladas"
+          },
+          {
+            "name": "Citas_Confirmadas",
+            "dataType": "int64",
+            "sourceColumn": "Citas_Confirmadas"
+          },
+          {
+            "name": "Porcentaje_Cancelacion",
+            "dataType": "double",
+            "sourceColumn": "Porcentaje_Cancelacion"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_TotalCitas_Medico_MesAnio = Source{[Schema=\"dbo\",Item=\"vw_TotalCitas_Medico_MesAnio\"]}[Data]",
+                "in",
+                "    dbo_vw_TotalCitas_Medico_MesAnio"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_TotalCitas_MesAnio",
+        "columns": [
+          {
+            "name": "Razon_cita",
+            "dataType": "string",
+            "sourceColumn": "Razon_cita"
+          },
+          {
+            "name": "Mes",
+            "dataType": "string",
+            "sourceColumn": "Mes"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_TotalCitas_MesAnio = Source{[Schema=\"dbo\",Item=\"vw_TotalCitas_MesAnio\"]}[Data]",
+                "in",
+                "    dbo_vw_TotalCitas_MesAnio"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_TotalCitasCanceladas_Anual",
+        "columns": [
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Estado",
+            "dataType": "string",
+            "sourceColumn": "Estado"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_TotalCitasCanceladas_Anual = Source{[Schema=\"dbo\",Item=\"vw_TotalCitasCanceladas_Anual\"]}[Data]",
+                "in",
+                "    dbo_vw_TotalCitasCanceladas_Anual"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_TotalCitasPorEstado_Trimestral",
+        "columns": [
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Trimestre",
+            "dataType": "int64",
+            "sourceColumn": "Trimestre"
+          },
+          {
+            "name": "Estado",
+            "dataType": "string",
+            "sourceColumn": "Estado"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_TotalCitasPorEstado_Trimestral = Source{[Schema=\"dbo\",Item=\"vw_TotalCitasPorEstado_Trimestral\"]}[Data]",
+                "in",
+                "    dbo_vw_TotalCitasPorEstado_Trimestral"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_TotalCitasPorRazon_2025",
+        "columns": [
+          {
+            "name": "Razon_cita",
+            "dataType": "string",
+            "sourceColumn": "Razon_cita"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_TotalCitasPorRazon_2025 = Source{[Schema=\"dbo\",Item=\"vw_TotalCitasPorRazon_2025\"]}[Data]",
+                "in",
+                "    dbo_vw_TotalCitasPorRazon_2025"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim_EstadoCita",
+        "columns": [
+          {
+            "name": "Estado_cita_key",
+            "dataType": "int64",
+            "sourceColumn": "Estado_cita_key"
+          },
+          {
+            "name": "Estado",
+            "dataType": "string",
+            "sourceColumn": "Estado"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_Dim_EstadoCita = Source{[Schema=\"dbo\",Item=\"Dim_EstadoCita\"]}[Data]",
+                "in",
+                "    dbo_Dim_EstadoCita"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim_Paciente",
+        "columns": [
+          {
+            "name": "Paciente_key",
+            "dataType": "int64",
+            "sourceColumn": "Paciente_key"
+          },
+          {
+            "name": "Nombre_COMPLETO_Pacientes",
+            "dataType": "string",
+            "sourceColumn": "Nombre_COMPLETO_Pacientes"
+          },
+          {
+            "name": "Sexo_Pacientes",
+            "dataType": "string",
+            "sourceColumn": "Sexo_Pacientes"
+          },
+          {
+            "name": "Edad_Pacientes",
+            "dataType": "int64",
+            "sourceColumn": "Edad_Pacientes"
+          },
+          {
+            "name": "Alergias_Pacientes",
+            "dataType": "string",
+            "sourceColumn": "Alergias_Pacientes"
+          },
+          {
+            "name": "Nombre_Completo_Tutor",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Completo_Tutor"
+          },
+          {
+            "name": "Sexo_Tutor",
+            "dataType": "string",
+            "sourceColumn": "Sexo_Tutor"
+          },
+          {
+            "name": "Edad_Tutor",
+            "dataType": "int64",
+            "sourceColumn": "Edad_Tutor"
+          },
+          {
+            "name": "Ocupacion_Tutor",
+            "dataType": "string",
+            "sourceColumn": "Ocupacion_Tutor"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_Dim_Paciente = Source{[Schema=\"dbo\",Item=\"Dim_Paciente\"]}[Data]",
+                "in",
+                "    dbo_Dim_Paciente"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim_PersonalMedico",
+        "columns": [
+          {
+            "name": "Personal_Medico_Key",
+            "dataType": "int64",
+            "sourceColumn": "Personal_Medico_Key"
+          },
+          {
+            "name": "Nombre_Completo_Medico",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Completo_Medico"
+          },
+          {
+            "name": "Sexo",
+            "dataType": "string",
+            "sourceColumn": "Sexo"
+          },
+          {
+            "name": "Edad",
+            "dataType": "int64",
+            "sourceColumn": "Edad"
+          },
+          {
+            "name": "Dependencia",
+            "dataType": "string",
+            "sourceColumn": "Dependencia"
+          },
+          {
+            "name": "Cargo",
+            "dataType": "string",
+            "sourceColumn": "Cargo"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_Dim_PersonalMedico = Source{[Schema=\"dbo\",Item=\"Dim_PersonalMedico\"]}[Data]",
+                "in",
+                "    dbo_Dim_PersonalMedico"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim_Razon",
+        "columns": [
+          {
+            "name": "Razon_cita_key",
+            "dataType": "int64",
+            "sourceColumn": "Razon_cita_key"
+          },
+          {
+            "name": "Razon_cita",
+            "dataType": "string",
+            "sourceColumn": "Razon_cita"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_Dim_Razon = Source{[Schema=\"dbo\",Item=\"Dim_Razon\"]}[Data]",
+                "in",
+                "    dbo_Dim_Razon"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim_Tiempo",
+        "columns": [
+          {
+            "name": "Tiempo_key",
+            "dataType": "int64",
+            "sourceColumn": "Tiempo_key"
+          },
+          {
+            "name": "Fecha",
+            "dataType": "dateTime",
+            "sourceColumn": "Fecha"
+          },
+          {
+            "name": "Semana",
+            "dataType": "int64",
+            "sourceColumn": "Semana"
+          },
+          {
+            "name": "Mes",
+            "dataType": "string",
+            "sourceColumn": "Mes"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Trimestre",
+            "dataType": "int64",
+            "sourceColumn": "Trimestre"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_Dim_Tiempo = Source{[Schema=\"dbo\",Item=\"Dim_Tiempo\"]}[Data]",
+                "in",
+                "    dbo_Dim_Tiempo"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Fact_CitaPediatrica",
+        "columns": [
+          {
+            "name": "FactCitaPediatricact_Key",
+            "dataType": "int64",
+            "sourceColumn": "FactCitaPediatricact_Key"
+          },
+          {
+            "name": "Personal_Medico_Key",
+            "dataType": "int64",
+            "sourceColumn": "Personal_Medico_Key"
+          },
+          {
+            "name": "Paciente_key",
+            "dataType": "int64",
+            "sourceColumn": "Paciente_key"
+          },
+          {
+            "name": "Razon_cita_key",
+            "dataType": "int64",
+            "sourceColumn": "Razon_cita_key"
+          },
+          {
+            "name": "Estado_cita_key",
+            "dataType": "int64",
+            "sourceColumn": "Estado_cita_key"
+          },
+          {
+            "name": "Tiempo_key",
+            "dataType": "int64",
+            "sourceColumn": "Tiempo_key"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_Fact_CitaPediatrica = Source{[Schema=\"dbo\",Item=\"Fact_CitaPediatrica\"]}[Data]",
+                "in",
+                "    dbo_Fact_CitaPediatrica"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_DimEstadoCita",
+        "columns": [
+          {
+            "name": "Estado_cita_key",
+            "dataType": "int64",
+            "sourceColumn": "Estado_cita_key"
+          },
+          {
+            "name": "Estado",
+            "dataType": "string",
+            "sourceColumn": "Estado"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_DimEstadoCita = Source{[Schema=\"dbo\",Item=\"vw_DimEstadoCita\"]}[Data]",
+                "in",
+                "    dbo_vw_DimEstadoCita"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_DimPaciente",
+        "columns": [
+          {
+            "name": "Paciente_key",
+            "dataType": "int64",
+            "sourceColumn": "Paciente_key"
+          },
+          {
+            "name": "Nombre_COMPLETO_Pacientes",
+            "dataType": "string",
+            "sourceColumn": "Nombre_COMPLETO_Pacientes"
+          },
+          {
+            "name": "Sexo_Pacientes",
+            "dataType": "string",
+            "sourceColumn": "Sexo_Pacientes"
+          },
+          {
+            "name": "Edad_Pacientes",
+            "dataType": "int64",
+            "sourceColumn": "Edad_Pacientes"
+          },
+          {
+            "name": "Alergias_Pacientes",
+            "dataType": "string",
+            "sourceColumn": "Alergias_Pacientes"
+          },
+          {
+            "name": "Nombre_Completo_Tutor",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Completo_Tutor"
+          },
+          {
+            "name": "Sexo_Tutor",
+            "dataType": "string",
+            "sourceColumn": "Sexo_Tutor"
+          },
+          {
+            "name": "Edad_Tutor",
+            "dataType": "int64",
+            "sourceColumn": "Edad_Tutor"
+          },
+          {
+            "name": "Ocupacion_Tutor",
+            "dataType": "string",
+            "sourceColumn": "Ocupacion_Tutor"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_DimPaciente = Source{[Schema=\"dbo\",Item=\"vw_DimPaciente\"]}[Data]",
+                "in",
+                "    dbo_vw_DimPaciente"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_CitasPorMes",
+        "columns": [
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Mes",
+            "dataType": "string",
+            "sourceColumn": "Mes"
+          },
+          {
+            "name": "Estado",
+            "dataType": "string",
+            "sourceColumn": "Estado"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_CitasPorMes = Source{[Schema=\"dbo\",Item=\"vw_CitasPorMes\"]}[Data]",
+                "in",
+                "    dbo_vw_CitasPorMes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_CitasMedico",
+        "columns": [
+          {
+            "name": "Nombre_Completo_Medico",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Completo_Medico"
+          },
+          {
+            "name": "Mes",
+            "dataType": "string",
+            "sourceColumn": "Mes"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          },
+          {
+            "name": "Total_Citas",
+            "dataType": "int64",
+            "sourceColumn": "Total_Citas"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;SS_VirtualDW\",",
+                "    dbo_vw_CitasMedico = Source{[Schema=\"dbo\",Item=\"vw_CitasMedico\"]}[Data]",
+                "in",
+                "    dbo_vw_CitasMedico"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "d30a7788-297b-4aff-aad0-dc474b2bc2a7",
+        "fromTable": "Fact_CitaPediatrica",
+        "fromColumn": "Estado_cita_key",
+        "toTable": "Dim_EstadoCita",
+        "toColumn": "Estado_cita_key"
+      },
+      {
+        "name": "056504da-65fa-40f1-83e0-0625545ae7de",
+        "fromTable": "Fact_CitaPediatrica",
+        "fromColumn": "Paciente_key",
+        "toTable": "Dim_Paciente",
+        "toColumn": "Paciente_key"
+      },
+      {
+        "name": "6b7ce7e1-2107-4711-9c79-2ddb4f469dd0",
+        "fromTable": "Fact_CitaPediatrica",
+        "fromColumn": "Personal_Medico_Key",
+        "toTable": "Dim_PersonalMedico",
+        "toColumn": "Personal_Medico_Key"
+      },
+      {
+        "name": "ee8d41e2-399c-4b7e-98c6-3cb7563aca08",
+        "fromTable": "Fact_CitaPediatrica",
+        "fromColumn": "Razon_cita_key",
+        "toTable": "Dim_Razon",
+        "toColumn": "Razon_cita_key"
+      },
+      {
+        "name": "f73d4be0-c9fc-4665-a8d0-b4eee76add24",
+        "fromTable": "Fact_CitaPediatrica",
+        "fromColumn": "Tiempo_key",
+        "toTable": "Dim_Tiempo",
+        "toColumn": "Tiempo_key"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
